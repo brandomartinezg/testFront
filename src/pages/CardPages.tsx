@@ -1,10 +1,65 @@
 import CardComponent from "../components/CardComponent";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import axios from "axios";
+import { Pokedex } from "../interfaces/pokedex";
+interface Props{
+    onAmount: Dispatch<SetStateAction<number>>,
+    onTotal: Dispatch<SetStateAction<number>>
+}
 
-const CardPages = () => {
-  return (
-    <>
-        <CardComponent/>
-    </>
-  )
+const CardPages = ({ onAmount, onTotal}:Props) => {
+    
+    const [pokedexState, setPokedexState] = useState<Pokedex>();
+    useEffect(() => {
+        axios.get<Pokedex>('https://pokeapi.co/api/v2/pokemon?limit=10&offset=0').then(
+            resp => {
+                setPokedexState(resp.data);
+                onTotal(resp.data.count);
+            }
+        ).catch(
+            error =>{
+                console.log(error)
+            }
+        )
+    }, [onTotal]);
+    
+    const fetch = () => {
+        if(pokedexState)
+            axios.get(pokedexState.next).then(
+                resp => {
+                    const copy = {...pokedexState};
+                    const { data } = resp;
+                    setPokedexState({
+                        count: data.count,
+                        next: data.next,
+                        previous: data.previous,
+                        results: copy.results.concat( data.results)
+                    });
+                    onAmount(prev => prev+10);
+                }
+            ).catch(
+                error => {
+                    console.log(error);
+                }
+            )
+        
+    }
+    return (
+        <>
+            <InfiniteScroll
+                dataLength={pokedexState?.results.length || 0}
+                next={fetch}
+                hasMore={true}
+                loader={<div>Espera</div>}
+            >
+                {
+                    pokedexState?.results?.map(r => 
+                        <CardComponent key={r.url} {...r}/>
+                    )
+                }
+            </InfiniteScroll> 
+        </>
+    )
 }
 export default CardPages;
