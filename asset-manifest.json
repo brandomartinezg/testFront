@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/pokemoncards/static/css/main.a3d5858b.css",
-    "main.js": "/pokemoncards/static/js/main.a5785572.js",
-    "static/js/787.4d723399.chunk.js": "/pokemoncards/static/js/787.4d723399.chunk.js",
-    "static/media/sword-svgrepo-com.svg": "/pokemoncards/static/media/sword-svgrepo-com.f4580af08a415d41e4e15b34a9c6af82.svg",
-    "index.html": "/pokemoncards/index.html",
-    "main.a3d5858b.css.map": "/pokemoncards/static/css/main.a3d5858b.css.map",
-    "main.a5785572.js.map": "/pokemoncards/static/js/main.a5785572.js.map",
-    "787.4d723399.chunk.js.map": "/pokemoncards/static/js/787.4d723399.chunk.js.map"
+    "main.css": "/testFront/static/css/main.a3d5858b.css",
+    "main.js": "/testFront/static/js/main.834821ec.js",
+    "static/js/787.4d723399.chunk.js": "/testFront/static/js/787.4d723399.chunk.js",
+    "static/media/sword-svgrepo-com.svg": "/testFront/static/media/sword-svgrepo-com.f4580af08a415d41e4e15b34a9c6af82.svg",
+    "index.html": "/testFront/index.html",
+    "main.a3d5858b.css.map": "/testFront/static/css/main.a3d5858b.css.map",
+    "main.834821ec.js.map": "/testFront/static/js/main.834821ec.js.map",
+    "787.4d723399.chunk.js.map": "/testFront/static/js/787.4d723399.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a3d5858b.css",
-    "static/js/main.a5785572.js"
+    "static/js/main.834821ec.js"
   ]
 }
