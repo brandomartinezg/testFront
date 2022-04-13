@@ -1,13 +1,13 @@
 import CardHeader from '@mui/material/CardHeader';
 import Card from '@mui/material/Card';
-import { Result } from '../interfaces/pokedex';
-import { Button, CardContent } from '@mui/material';
 import axios from 'axios';
 import { useMemo, useState } from 'react';
+import { useCallback } from 'react';
+import { Result } from '../interfaces/pokedex';
 import { Pokemon } from '../interfaces/pokemon';
 import { DialogComponent } from './DialogComponent';
+import { Button, CardContent } from '@mui/material';
 import './CardComponent.scss';
-import { useCallback } from 'react';
 
 const CardComponent = ({name, url}:Result) => {
     const [info, setInfo] = useState<Pokemon>();

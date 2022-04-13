@@ -1,18 +1,28 @@
-import CardComponent from "../components/CardComponent";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useState, useEffect, Dispatch, SetStateAction} from 'react';
+import CardComponent from "../components/CardComponent";
 import axios from "axios";
-import { Pokedex } from "../interfaces/pokedex";
+import { Pokedex, Result } from '../interfaces/pokedex';
 import { CircularProgress } from "@mui/material";
-interface Props{
+import { useMemo } from 'react';
+import { 
+    useState, useEffect, Dispatch, SetStateAction, forwardRef,
+    useImperativeHandle, ForwardRefRenderFunction, ChangeEvent
+    } from 'react';
+
+type Props = {
     onAmount: Dispatch<SetStateAction<number>>,
     onTotal: Dispatch<SetStateAction<number>>,
-    total: number
+    total: number,
+    amount: number
 }
 
-const CardPages = ({ onAmount, onTotal, total}:Props) => {
-    
+type OnFilterPokemon = {
+    filterpokemon: (data:ChangeEvent<HTMLInputElement>) => void;
+}
+
+const CardPages:ForwardRefRenderFunction<OnFilterPokemon, Props> =({ onAmount, onTotal, total, amount}, ref) => {
     const [pokedexState, setPokedexState] = useState<Pokedex>();
+    const [pokedexFiltered, setPokedexFiltered] = useState<Result[]>();
     useEffect(() => {
         axios.get<Pokedex>('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0').then(
             resp => {
@@ -47,18 +57,48 @@ const CardPages = ({ onAmount, onTotal, total}:Props) => {
             )
         
     }
+    useEffect(() => {
+        if(pokedexState?.results)
+            setPokedexFiltered(pokedexState.results);
+    }, [pokedexState]);
+
+    const filteredMemo = useMemo(() => (data:string) => {
+        setPokedexFiltered( 
+            pokedexState?.results.filter(
+                p => p.name.toLowerCase().includes(data)
+            )
+        );
+    },[pokedexState]);
+    
+    useImperativeHandle(ref,
+        () => ({
+                filterpokemon(data:ChangeEvent<HTMLInputElement>){
+                    filteredMemo(data.target.value.toLocaleLowerCase())
+                }
+            }),
+        [filteredMemo],
+    )
+
+    const hasMoreRule = () => {
+        if(pokedexFiltered?.length === 0)
+            return false;
+        else if(amount === total)
+            return false;
+        else
+            return true;
+    }
 
     return (
         <>
             <InfiniteScroll
                 dataLength={pokedexState?.results.length || 0}
                 next={fetch}
-                hasMore={true}
+                hasMore={ hasMoreRule()}
                 loader={<CircularProgress />}
                 style={{display: 'flex', flexWrap:'wrap', justifyContent:'space-around'}}
             >
                 {
-                    pokedexState?.results?.map(r => 
+                    pokedexFiltered?.map(r => 
                         <CardComponent key={r.url} {...r}/>
                     )
                 }
@@ -66,4 +106,4 @@ const CardPages = ({ onAmount, onTotal, total}:Props) => {
         </>
     )
 }
-export default CardPages;
+export default forwardRef( CardPages);
