@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/pokemoncards/static/css/main.a3d5858b.css",
+    "main.js": "/pokemoncards/static/js/main.a5785572.js",
+    "static/js/787.4d723399.chunk.js": "/pokemoncards/static/js/787.4d723399.chunk.js",
+    "static/media/sword-svgrepo-com.svg": "/pokemoncards/static/media/sword-svgrepo-com.f4580af08a415d41e4e15b34a9c6af82.svg",
+    "index.html": "/pokemoncards/index.html",
+    "main.a3d5858b.css.map": "/pokemoncards/static/css/main.a3d5858b.css.map",
+    "main.a5785572.js.map": "/pokemoncards/static/js/main.a5785572.js.map",
+    "787.4d723399.chunk.js.map": "/pokemoncards/static/js/787.4d723399.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a3d5858b.css",
+    "static/js/main.a5785572.js"
+  ]
+}
