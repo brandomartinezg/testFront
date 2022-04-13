@@ -1,6 +1,12 @@
 @import "../general";
 .dialog-box{
     width: 20rem;
+    @media screen and (max-width: 634px) {
+        width: 15rem;
+    }
+    @media screen and (max-width: 352px) {
+        width: 10rem;
+    }
     .dialog-content-text{
         display: flex;
         flex-direction: column;
@@ -15,4 +21,9 @@
             }
         }
     }
+}
+.button-close{
+    background-color: $flamingo !important;
+    color: white !important;
+    border-radius: 1rem;
 }

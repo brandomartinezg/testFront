@@ -33,7 +33,7 @@ export const DialogComponent = ({open, title, handleClose, moves}: Props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cerrar</Button>
+          <Button className="button-close" onClick={handleClose}>Cerrar</Button>
         </DialogActions>
       </Dialog>
   )
