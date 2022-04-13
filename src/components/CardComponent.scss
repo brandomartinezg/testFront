@@ -1,0 +1,40 @@
+@import "../general";
+
+.cardContainer{
+    height: 13rem;
+    width: 12rem;
+    max-width: 12rem;
+    margin: 2rem;
+    background-color: $orange !important;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin-top: 2rem;
+    font-family: $font;
+    font-weight: 800;
+    line-height: 1.375em;
+    letter-spacing: -0.015em;
+    .card-content-all{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-self: center;
+        .showMore{
+            background-color: $flamingo;
+            color: white;
+            border-radius: 1rem;
+            align-self: flex-end;
+            &:hover{
+                background-color: rgb(178, 48, 30);
+            }
+        }
+        .img-pokemon{
+            height: 5rem;
+            width: 5rem;
+        }
+    }
+    .cardContainer-header{
+        display: flex;
+        justify-content: center;
+    }
+}
